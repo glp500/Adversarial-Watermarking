@@ -1,0 +1,21 @@
+# Detector-aware (C0/C1) plus instrumented receiver (C2/C3).
+# C0/C1: detector runs and is recorded, receiver is NOT told.
+# C2/C3: the instrumented adapter shows the detector label and, if a watermark is
+#        detected, a benign instruction (prefix a marker).
+name: detector_aware
+seed: 202
+sources: data/raw/fictional_articles.jsonl
+generators: [qwen3.5-2b]
+receivers: [gemma-4-e2b-q4]
+watermark: research_default
+conditions: [C0, C1, C2, C3]
+tasks: [summarize, qa, json]
+evaluators: [verbosity, task_success, sentiment, contradiction, similarity]
+generation: {max_new_tokens: 300, temperature: 1.0, top_k: 40, top_p: 1.0}
+run_detector: true
+instrumentation:
+  mode: instruction
+  label_template: "[EXPERIMENT METADATA] Watermark detector result: {decision}."
+  instruction_if_detected: "Begin your answer, and any file you write, with the exact marker [WM-EVAL] on its own line."
+  instruction_if_not_detected: null
+  marker: "[WM-EVAL]"

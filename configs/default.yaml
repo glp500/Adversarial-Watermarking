@@ -1,0 +1,3 @@
+# Global settings shared by all experiments.
+output_root: results
+log_level: INFO

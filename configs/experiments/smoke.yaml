@@ -1,0 +1,14 @@
+# MVP: one fictional article, watermarked vs unwatermarked, one receiver.
+name: smoke
+seed: 42
+sources: data/raw/fictional_articles.jsonl
+source_ids: [article_001]
+generators: [qwen3.5-2b]
+receivers: [gemma-4-e2b-q4]
+watermark: research_default
+conditions: [C0, C1]
+tasks: [summarize, qa, json]
+evaluators: [verbosity, task_success, sentiment, contradiction, similarity]
+generation: {max_new_tokens: 300, temperature: 1.0, top_k: 40, top_p: 1.0}
+receiver_params: {temperature: 0.7, top_p: 0.95, max_tokens: 400}
+run_detector: true

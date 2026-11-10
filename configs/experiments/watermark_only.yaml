@@ -1,0 +1,13 @@
+# Watermark-only: the detector is never run; the receiver just reads the documents.
+name: watermark_only
+seed: 101
+sources: data/raw/fictional_articles.jsonl
+generators: [qwen3.5-2b]
+receivers: [gemma-4-e2b-q4]
+watermark: research_default
+conditions: [C0, C1]
+tasks: [summarize, extract_claims, limitation, qa, json]
+evaluators: [verbosity, task_success, sentiment, emotion, contradiction, similarity]
+generation: {max_new_tokens: 300, temperature: 1.0, top_k: 40, top_p: 1.0}
+receiver_repeats: 2
+run_detector: false

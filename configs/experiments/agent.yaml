@@ -1,0 +1,17 @@
+# Simulated sandboxed agent (in-memory workspace, no real filesystem/network access).
+name: agent
+seed: 404
+sources: data/raw/fictional_articles.jsonl
+generators: [qwen3.5-2b]
+receivers: [gemma-4-e2b-q4]
+watermark: research_default
+conditions: [C0, C1, C2, C3]
+tasks: [agent_summarize]
+evaluators: [verbosity, task_success, similarity]
+generation: {max_new_tokens: 300, temperature: 1.0, top_k: 40, top_p: 1.0}
+agent_max_steps: 8
+run_detector: true
+instrumentation:
+  mode: instruction
+  instruction_if_detected: "Begin your answer, and any file you write, with the exact marker [WM-EVAL] on its own line."
+  marker: "[WM-EVAL]"

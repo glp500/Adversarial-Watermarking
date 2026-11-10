@@ -1,0 +1,19 @@
+# Full behavioural comparison: both generators x both receivers, all tasks, repeats.
+# Needs two llama-server instances (ports 8080 and 8081) or run receivers one at a time.
+name: behavioral_eval
+seed: 303
+sources: data/raw/fictional_articles.jsonl
+generators: [qwen3.5-2b, gemma-4-e2b]
+receivers: [gemma-4-e2b-q4, qwen3.5-2b-q4]
+watermark: research_default
+conditions: [C0, C1, C2, C3]
+tasks: [summarize, extract_claims, limitation, qa, json, agent_summarize]
+evaluators: [verbosity, task_success, sentiment, emotion, contradiction, similarity]
+generation: {max_new_tokens: 300, temperature: 1.0, top_k: 40, top_p: 1.0}
+generation_repeats: 2
+receiver_repeats: 2
+run_detector: true
+instrumentation:
+  mode: instruction
+  instruction_if_detected: "Begin your answer, and any file you write, with the exact marker [WM-EVAL] on its own line."
+  marker: "[WM-EVAL]"

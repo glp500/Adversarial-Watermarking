@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wm-eval"
+version = "0.1.0"
+description = "Watermark-aware LLM evaluation framework (SynthID Text + llama.cpp receivers)"
+requires-python = ">=3.11"
+dependencies = [
+    # Transformers >=5 ships the official SynthID Text port (SynthIDTextWatermarkLogitsProcessor)
+    # and supports Qwen3.5 / Gemma 4. The standalone `synthid-text` package pins
+    # transformers==4.43.3 / torch==2.4.0, which cannot load these models.
+    "torch>=2.6",
+    "transformers>=5.0",
+    "accelerate>=1.0",
+    "openai>=1.40",
+    "httpx>=0.27",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "numpy>=1.26",
+    "pandas>=2.2",
+    "pyarrow>=15",
+    "scipy>=1.12",
+    "scikit-learn>=1.4",
+    "sentence-transformers>=3.0",
+    "spacy>=3.7",
+    "datasets>=2.18",
+    "matplotlib>=3.8",
+    "pypdf>=5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.5", "nbformat>=5"]
+
+[project.scripts]
+wm-eval = "wm_eval.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]  # line length is enforced by `ruff format`
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "model: needs a real Hugging Face model download (set WM_EVAL_MODEL_TESTS=1)",
+    "server: needs a running llama.cpp server (set WM_EVAL_SERVER_TESTS=1)",
+]

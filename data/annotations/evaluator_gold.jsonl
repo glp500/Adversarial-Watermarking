@@ -1,0 +1,34 @@
+{"kind": "sentiment", "text": "The new coating worked far better than expected and the team is delighted.", "label": "positive"}
+{"kind": "sentiment", "text": "Volunteers enjoyed mapping the glowing moss, which made the fieldwork fun.", "label": "positive"}
+{"kind": "sentiment", "text": "The tonic modestly improved sleep, a welcome result for patients.", "label": "positive"}
+{"kind": "sentiment", "text": "This is a promising, low-cost way to protect hillsides after wildfires.", "label": "positive"}
+{"kind": "sentiment", "text": "Researchers celebrated a clear and reproducible improvement in heat retention.", "label": "positive"}
+{"kind": "sentiment", "text": "The results were encouraging and the authors look forward to larger trials.", "label": "positive"}
+{"kind": "sentiment", "text": "The trial failed to show any benefit and several participants felt worse.", "label": "negative"}
+{"kind": "sentiment", "text": "Critics called the study deeply flawed and its conclusions misleading.", "label": "negative"}
+{"kind": "sentiment", "text": "The coating cracked after a few weeks, a disappointing outcome.", "label": "negative"}
+{"kind": "sentiment", "text": "Funding ties to the manufacturer raise serious concerns about bias.", "label": "negative"}
+{"kind": "sentiment", "text": "Erosion destroyed the control plots, leaving the farmers devastated.", "label": "negative"}
+{"kind": "sentiment", "text": "Unfortunately the data were lost and the experiment had to be abandoned.", "label": "negative"}
+{"kind": "contradiction", "premise": "The team monitored 48 soil plots over two years.", "hypothesis": "The team monitored 48 plots.", "label": false}
+{"kind": "contradiction", "premise": "The team monitored 48 soil plots over two years.", "hypothesis": "The team monitored 12 plots.", "label": true}
+{"kind": "contradiction", "premise": "Seeded plots lost 31 percent less soil than control plots.", "hypothesis": "The moss increased soil loss.", "label": true}
+{"kind": "contradiction", "premise": "Seeded plots lost 31 percent less soil than control plots.", "hypothesis": "The moss reduced soil loss.", "label": false}
+{"kind": "contradiction", "premise": "Total sleep time did not differ meaningfully between groups.", "hypothesis": "Somnaril greatly increased total sleep time.", "label": true}
+{"kind": "contradiction", "premise": "Total sleep time did not differ meaningfully between groups.", "hypothesis": "Total sleep time was similar in both groups.", "label": false}
+{"kind": "contradiction", "premise": "No serious adverse events were reported.", "hypothesis": "Several participants had serious adverse events.", "label": true}
+{"kind": "contradiction", "premise": "The trial was partly funded by the company that makes Somnaril.", "hypothesis": "The manufacturer helped fund the trial.", "label": false}
+{"kind": "contradiction", "premise": "All tests were performed in a controlled laboratory.", "hypothesis": "The coating was tested in real homes for a year.", "label": true}
+{"kind": "contradiction", "premise": "The coating reduced heat loss by 22 percent.", "hypothesis": "Heat loss fell by about a fifth.", "label": false}
+{"kind": "contradiction", "premise": "The study was conducted on a single island.", "hypothesis": "The study covered many islands across the region.", "label": true}
+{"kind": "contradiction", "premise": "Water stayed above 70 degrees for 41 minutes in coated kettles.", "hypothesis": "Coated kettles kept water hot for 41 minutes.", "label": false}
+{"kind": "emotion", "text": "I am terrified that the dam will collapse tonight.", "label": "fear"}
+{"kind": "emotion", "text": "I'm so scared of what the test results will show.", "label": "fear"}
+{"kind": "emotion", "text": "This is outrageous, they lied to us again!", "label": "anger"}
+{"kind": "emotion", "text": "I am furious that the funding was cut without warning.", "label": "anger"}
+{"kind": "emotion", "text": "She was heartbroken when the project was cancelled.", "label": "sadness"}
+{"kind": "emotion", "text": "We are grieving the loss of our colleague.", "label": "sadness"}
+{"kind": "emotion", "text": "I don't understand how these numbers fit together.", "label": "confusion"}
+{"kind": "emotion", "text": "Wait, which group received the placebo? I'm confused.", "label": "confusion"}
+{"kind": "emotion", "text": "The samples were stored at four degrees Celsius.", "label": "neutral"}
+{"kind": "emotion", "text": "The report has twelve pages and three tables.", "label": "neutral"}

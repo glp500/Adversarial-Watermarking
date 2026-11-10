@@ -1,0 +1,14 @@
+# Detector-only held-out corpus: no receivers. Reports TPR/FPR per generator and input kind.
+# The threshold (alpha) is fixed in watermark.yaml, never tuned on this corpus.
+name: detection_eval
+seed: 505
+sources: data/raw/fictional_articles.jsonl
+generators: [qwen3.5-2b, gemma-4-e2b]
+receivers: []
+watermark: research_default
+conditions: [C0, C1]
+tasks: [summarize]
+evaluators: []
+generation: {max_new_tokens: 300, temperature: 1.0, top_k: 40, top_p: 1.0}
+generation_repeats: 8
+run_detector: true

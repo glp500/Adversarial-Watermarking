@@ -1,0 +1,46 @@
+# Generators: Hugging Face checkpoints run with Transformers (watermarking happens here).
+# Receivers: GGUF models served by llama.cpp `llama-server` (OpenAI-compatible API).
+#
+# Development uses ~2B models. Target models for the full study (add when hardware allows):
+#   google/gemma-4-31B-it, google/gemma-4-26B-A4B-it, Qwen/Qwen3.5-27B
+generators:
+  qwen3.5-2b:
+    hf_id: Qwen/Qwen3.5-2B
+    revision: 15852e8c16360a2fea060d615a32b45270f8a8fc
+    model_class: Qwen3_5ForConditionalGeneration   # multimodal checkpoint
+    dtype: bfloat16
+    device: auto          # accelerate places layers on GPU, spilling to CPU if needed
+    quantization: none
+    chat_template_kwargs: {enable_thinking: false}
+  gemma-4-e2b:
+    hf_id: google/gemma-4-E2B-it
+    revision: 4adf15748de9e1a0097b6274cee9c15836c41c37
+    model_class: Gemma4ForConditionalGeneration    # multimodal checkpoint
+    dtype: bfloat16
+    # ~10 GB of weights (audio/vision towers + per-layer embeddings). On a 6 GB GPU,
+    # device_map=auto offloading fails in Gemma4's multimodal embedding (meta tensor), so
+    # run on CPU here; use `auto` or `cuda` on a GPU that holds the whole model.
+    device: cpu
+    quantization: none
+    chat_template_kwargs: {}
+
+receivers:
+  # Start with: llama-server -m <gguf> --port 8080 -c 32768 -np 1 -ngl 99 --jinja  (both fit in 6 GB at 32k)
+  gemma-4-e2b-q4:
+    base_url: http://127.0.0.1:8080/v1
+    model: gemma-4-e2b
+    gguf: gemma-4-E2B-it-qat-UD-Q4_K_XL.gguf
+    hf_source: unsloth/gemma-4-E2B-it-GGUF
+    quantization: Q4_K_XL (QAT)
+    timeout_s: 300
+    # Gemma 4's template starts "thinking" when a system prompt is present; turn it off so
+    # both receivers answer directly within the same max_tokens budget.
+    chat_template_kwargs: {enable_thinking: false}
+  qwen3.5-2b-q4:
+    base_url: http://127.0.0.1:8081/v1
+    model: qwen3.5-2b
+    gguf: Qwen3.5-2B-Q4_K_M.gguf
+    hf_source: unsloth/Qwen3.5-2B-GGUF
+    quantization: Q4_K_M
+    timeout_s: 300
+    chat_template_kwargs: {enable_thinking: false}

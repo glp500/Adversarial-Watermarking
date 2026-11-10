@@ -1,0 +1,11 @@
+# SynthID Text configurations. Keys are derived from the secret in `secret_env`
+# (see .env.example) and are never written to logs or artifacts; only key_id is recorded.
+research_default:
+  key_id: research_key_001
+  secret_env: WM_SECRET
+  depth: 30                  # number of keys / tournament layers
+  ngram_len: 5
+  context_history_size: 1024
+  sampling_table_size: 65536
+  sampling_table_seed: 0
+  detection_threshold: 0.01  # alpha for the binomial-test p-value
